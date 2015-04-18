@@ -10,7 +10,7 @@ App::uses('ModelBehavior', 'Model');
 class MoneyFormatBehavior extends ModelBehavior {
 
 
-	public $settings = array();
+	public $settings = [];
 
 /**
  * Set configs for behavior well functioning.
@@ -19,7 +19,7 @@ class MoneyFormatBehavior extends ModelBehavior {
  * @param array $config Configuration settings for $model
  * @return void
  */
-	public function setup(Model $model, $config = array()) {
+	public function setup(Model $model, $config = []) {
 		if (empty($config['fields'])) {
 			trigger_error(__('\'fields\' property for MoneyFormatBehavior must be set.'), E_USER_WARNING);
 			return false;
@@ -36,7 +36,7 @@ class MoneyFormatBehavior extends ModelBehavior {
  * @return mixed False or null will abort the operation. Any other result will continue.
  * @see Model::save()
  */
-	public function beforeValidate(Model $model, $options = array()) {
+	public function beforeValidate(Model $model, $options = []) {
 		$fields = $this->settings['fields'];
 		foreach ($fields as $field) {
 			$model->validate[$field]['money_format'] = [
@@ -58,7 +58,7 @@ class MoneyFormatBehavior extends ModelBehavior {
  * @return mixed False if the operation should abort. Any other result will continue.
  * @see Model::save()
  */
-	public function beforeSave(Model $model, $options = array()) {
+	public function beforeSave(Model $model, $options = []) {
 		$fields = $this->settings['fields'];
 		foreach ($fields as $field) {
 			if (!empty($model->data[$model->alias][$field])) {
