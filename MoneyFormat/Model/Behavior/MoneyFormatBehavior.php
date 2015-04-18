@@ -61,8 +61,7 @@ class MoneyFormatBehavior extends ModelBehavior {
 	public function beforeSave(Model $model, $options = array()) {
 		$fields = $this->settings['fields'];
 		foreach ($fields as $field) {
-			$modelField = $model->data[$model->alias][$field];
-			if (!empty($modelField)) {
+			if (!empty($model->data[$model->alias][$field])) {
 				$value =& $model->data[$model->alias][$field];
 				$value = str_replace('.', '', $value);
 				$value = str_replace(',', '.', $value);
